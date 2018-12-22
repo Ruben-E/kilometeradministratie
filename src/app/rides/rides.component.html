@@ -1,10 +1,89 @@
-<div *ngIf="rides">
+<div *ngIf='isLoggedIn()'>
+  <div *ngIf="sheetLoading">
+    Loading...
+  </div>
 
-  <ul class="rides">
-    <li *ngFor="let ride of rides">
-      {{ride.fromAddress}} -> {{ride.toAddress}}
-    </li>
-  </ul>
+  <div *ngIf="!sheetLoading">
 
+    <div *ngIf="sheet">
+      <h1>{{sheet.name}}</h1>
 
+      <form (ngSubmit)="onSubmit()" #rideForm="ngForm">
+        <div class="form-group">
+          <label for="date">Datum</label>
+          <input type="date" class="form-control" id="date" name="date" required [(ngModel)]="newRide.date">
+        </div>
+
+        <div class="form-group">
+          <label for="startOdoMeter">Beginstand</label>
+          <input type="number" class="form-control" id="startOdoMeter" name="startOdoMeter" required
+                 [(ngModel)]="newRide.startOdoMeter">
+        </div>
+
+        <div class="form-group">
+          <label for="endOdoMeter">Eindstand</label>
+          <input type="number" class="form-control" id="endOdoMeter" name="endOdoMeter" required
+                 [(ngModel)]="newRide.endOdoMeter">
+        </div>
+
+        <div class="form-group">
+          <label for="fromAddress">Van</label>
+          <input type="text" class="form-control" id="fromAddress" name="fromAddress" required
+                 [(ngModel)]="newRide.fromAddress">
+        </div>
+
+        <div class="form-group">
+          <label for="toAddress">Naar</label>
+          <input type="text" class="form-control" id="toAddress" name="toAddress" required
+                 [(ngModel)]="newRide.toAddress">
+        </div>
+
+        <div class="form-group">
+          <label for="route">Afwijkende route</label>
+          <input type="text" class="form-control" id="route" name="route" [(ngModel)]="newRide.route">
+        </div>
+
+        <div class="form-group">
+          <label for="visitedAddress">Bezoekadres</label>
+          <input type="text" class="form-control" id="visitedAddress" name="visitedAddress"
+                 [(ngModel)]="newRide.visitedAddress">
+        </div>
+
+        <div class="form-group">
+          <label for="type">Type</label>
+          <input type="text" class="form-control" id="type" name="type" required [(ngModel)]="newRide.type">
+        </div>
+
+        <div class="form-group">
+          <label for="remarks">Bijzonderheden</label>
+          <input type="text" class="form-control" id="remarks" name="remarks" [(ngModel)]="newRide.remarks">
+        </div>
+
+        <button type="submit" class="btn btn-success">Submit</button>
+
+      </form>
+
+      <div *ngIf="ridesLoading">
+        Loading...
+      </div>
+
+      <div *ngIf="!ridesLoading">
+        <div *ngIf="rides">
+          <ul class="rides">
+            <li *ngFor="let ride of rides">
+              {{ride.date}} - {{ride.number }} - {{ride.fromAddress}} -> {{ride.toAddress}}
+            </li>
+          </ul>
+        </div>
+        <div *ngIf="!rides">
+          Error...
+        </div>
+      </div>
+
+    </div>
+
+    <div *ngIf="!sheet">
+      Error...
+    </div>
+  </div>
 </div>

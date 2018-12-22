@@ -1,5 +1,20 @@
-<ul class="sheets">
-  <li *ngFor="let sheet of sheets">
-    <a routerLink="/rides/{{sheet.id}}"><span class="badge">{{sheet.id}}</span> {{sheet.name}}</a>
-  </li>
-</ul>
+<div *ngIf='isLoggedIn()'>
+
+  <div *ngIf="sheets">
+    <ul class="sheets">
+      <li *ngFor="let sheet of sheets">
+        <a routerLink="/rides/{{sheet.id}}"><span class="badge">{{sheet.id}}</span> {{sheet.name}}</a>
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="!sheets">
+    <div *ngIf="sheetsLoading">
+      Loading...
+    </div>
+    <div *ngIf="!sheetsLoading">
+      Error...
+    </div>
+  </div>
+
+</div>

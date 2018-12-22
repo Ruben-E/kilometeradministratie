@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {SheetService} from "../sheet.service";
 import {Sheet} from "../sheet";
+import {UserService} from "../user.service";
 
 
 @Component({
@@ -11,8 +12,10 @@ import {Sheet} from "../sheet";
 export class SheetsComponent implements OnInit {
 
   sheets: Sheet[];
+  sheetsLoading: boolean = true;
 
-  constructor(private sheetService: SheetService) {
+  constructor(private sheetService: SheetService,
+              private userService: UserService) {
   }
 
   ngOnInit() {
@@ -20,8 +23,16 @@ export class SheetsComponent implements OnInit {
   }
 
   getSheets(): void {
-    this.sheetService.getSheets()
-      .subscribe(sheets => this.sheets = sheets);
+    this.sheetsLoading = true;
+    this.sheetService.getSheets(this.userService.getToken())
+      .subscribe(sheets => {
+        this.sheets = sheets;
+        this.sheetsLoading = false;
+      });
+  }
+
+  isLoggedIn(): boolean {
+    return this.userService.isUserSignedIn();
   }
 
 }
