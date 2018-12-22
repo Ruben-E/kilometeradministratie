@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {SHEETS} from '../mock-sheets';
+import {SheetService} from "../sheet.service";
 import {Sheet} from "../sheet";
+
 
 @Component({
   selector: 'app-sheets',
@@ -9,17 +10,18 @@ import {Sheet} from "../sheet";
 })
 export class SheetsComponent implements OnInit {
 
-  sheets = SHEETS;
-  selectedSheet: Sheet;
+  sheets: Sheet[];
 
-  constructor() {
+  constructor(private sheetService: SheetService) {
   }
 
   ngOnInit() {
+    this.getSheets()
   }
 
-  onSelect(sheet: Sheet): void {
-    this.selectedSheet = sheet;
+  getSheets(): void {
+    this.sheetService.getSheets()
+      .subscribe(sheets => this.sheets = sheets);
   }
 
 }
