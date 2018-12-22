@@ -1,0 +1,7 @@
+<ul class="sheets">
+  <li *ngFor="let sheet of sheets" (click)="onSelect(sheet)">
+    <span class="badge">{{sheet.id}}</span> {{sheet.name}}
+  </li>
+</ul>
+
+<app-rides [sheet]="selectedSheet"></app-rides>
