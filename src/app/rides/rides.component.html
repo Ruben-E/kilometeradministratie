@@ -8,7 +8,7 @@
       <div *ngIf="!sheetLoading">
 
         <div *ngIf="sheet">
-          <h1>{{sheet.name}}</h1>
+          <h1 class="mat-display-1">{{sheet.name}}</h1>
 
           <app-log-ride [rides]="rides" [sheetId]="getSheetId()" (logged)="rideLogged($event)"></app-log-ride>
 

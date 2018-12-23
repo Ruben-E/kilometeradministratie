@@ -19,6 +19,7 @@ let gapiClientConfig: NgGapiClientConfig = {
   client_id: clientId,
   discoveryDocs: ["https://analyticsreporting.googleapis.com/$discovery/rest?version=v4"],
   // ux_mode: "redirect",
+
   scope: [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive",

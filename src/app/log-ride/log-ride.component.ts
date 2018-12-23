@@ -16,6 +16,7 @@ export class LogRideComponent implements OnChanges, OnInit {
   @Output() logged = new EventEmitter<Ride>();
 
   newRide: Ride = this.defaultRide();
+  differentRoute: boolean = false;
 
   constructor(private rideService: RideService,
               private userService: UserService) { }
@@ -42,6 +43,7 @@ export class LogRideComponent implements OnChanges, OnInit {
 
   onSubmit() {
     this.newRide.number = this.rides.filter(ride => dayjs(ride.date).isSame(dayjs(this.newRide.date))).length + 1;
+    this.newRide.kilometers = this.newRide.endOdoMeter - this.newRide.startOdoMeter;
     this.rideService.saveRide(this.userService.getToken(), this.sheetId, this.newRide).subscribe(_ => {
       this.logged.emit(this.newRide);
       this.newRide = this.defaultRide();
