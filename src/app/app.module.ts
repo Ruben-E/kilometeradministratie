@@ -8,6 +8,9 @@ import {SheetsComponent} from './sheets/sheets.component';
 import {FormsModule} from "@angular/forms";
 import {GoogleApiModule, NG_GAPI_CONFIG, NgGapiClientConfig} from "ng-gapi";
 import {HttpClientModule} from "@angular/common/http";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MaterialModule} from "./material.module";
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 let clientId = "";
 let gapiClientConfig: NgGapiClientConfig = {
@@ -31,6 +34,9 @@ let gapiClientConfig: NgGapiClientConfig = {
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    MaterialModule,
+    FlexLayoutModule,
     GoogleApiModule.forRoot({
       provide: NG_GAPI_CONFIG,
       useValue: gapiClientConfig

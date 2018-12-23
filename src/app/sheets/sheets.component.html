@@ -1,20 +1,30 @@
-<div *ngIf='isLoggedIn()'>
+<section class="section">
+  <div class="container">
+    <h1>Spreadsheets</h1>
+    <mat-card>
+      <mat-card-content>
 
-  <div *ngIf="sheets">
-    <ul class="sheets">
-      <li *ngFor="let sheet of sheets">
-        <a routerLink="/rides/{{sheet.id}}"><span class="badge">{{sheet.id}}</span> {{sheet.name}}</a>
-      </li>
-    </ul>
+        <div *ngIf='isLoggedIn()'>
+
+          <div *ngIf="sheets">
+            <mat-nav-list>
+                <a *ngFor="let sheet of sheets" mat-list-item routerLink="/rides/{{sheet.id}}">{{sheet.name}}</a>
+            </mat-nav-list>
+          </div>
+
+          <div *ngIf="!sheets">
+            <div *ngIf="sheetsLoading">
+              Loading...
+            </div>
+            <div *ngIf="!sheetsLoading">
+              Error...
+            </div>
+          </div>
+
+        </div>
+      </mat-card-content>
+    </mat-card>
   </div>
+</section>
 
-  <div *ngIf="!sheets">
-    <div *ngIf="sheetsLoading">
-      Loading...
-    </div>
-    <div *ngIf="!sheetsLoading">
-      Error...
-    </div>
-  </div>
 
-</div>

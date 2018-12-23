@@ -1,6 +1,4 @@
 import {Injectable} from '@angular/core';
-import {of} from "rxjs";
-import {RIDES} from "./mock-rides";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {map} from "rxjs/operators";
 import {Ride} from "./ride";
