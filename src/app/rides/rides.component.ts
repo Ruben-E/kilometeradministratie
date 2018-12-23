@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {Sheet} from '../sheet';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
@@ -17,9 +17,7 @@ export class RidesComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private rideService: RideService,
-    private userService: UserService,
-    private sheetService: SheetService,
-    private location: Location
+    private sheetService: SheetService
   ) {
   }
 
@@ -36,7 +34,7 @@ export class RidesComponent implements OnInit {
 
   getSheet(): void {
     this.sheetLoading = true;
-    this.sheetService.getSheet(this.userService.getToken(), this.getSheetId())
+    this.sheetService.getSheet(this.getSheetId())
       .subscribe(sheet => {
         this.sheet = sheet;
         this.sheetLoading = false;
@@ -45,7 +43,7 @@ export class RidesComponent implements OnInit {
 
   getRides(): void {
     this.ridesLoading = true;
-    this.rideService.getRides(this.userService.getToken(), this.getSheetId())
+    this.rideService.getRides(this.getSheetId())
       .subscribe(rides => {
         this.rides = rides.reverse();
         this.ridesLoading = false;
@@ -54,10 +52,6 @@ export class RidesComponent implements OnInit {
 
   getSheetId(): string {
     return this.route.snapshot.paramMap.get('id');
-  }
-
-  isLoggedIn(): boolean {
-    return this.userService.isUserSignedIn();
   }
 
   rideLogged(ride: Ride) {

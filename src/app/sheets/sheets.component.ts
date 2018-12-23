@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {SheetService} from "../sheet.service";
 import {Sheet} from "../sheet";
 import {UserService} from "../user.service";
@@ -11,6 +11,7 @@ import {UserService} from "../user.service";
 })
 export class SheetsComponent implements OnInit {
 
+  signedIn: boolean = false;
   sheets: Sheet[];
   sheetsLoading: boolean = true;
 
@@ -19,20 +20,26 @@ export class SheetsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getSheets()
+    this.isLoggedIn();
   }
 
   getSheets(): void {
     this.sheetsLoading = true;
-    this.sheetService.getSheets(this.userService.getToken())
+    this.sheetService.getSheets()
       .subscribe(sheets => {
         this.sheets = sheets;
         this.sheetsLoading = false;
       });
   }
 
-  isLoggedIn(): boolean {
-    return this.userService.isUserSignedIn();
+  isLoggedIn() {
+    this.userService.isUserSignedIn().subscribe(signedIn => {
+      this.signedIn = signedIn;
+
+      if (signedIn) {
+        this.getSheets();
+      }
+    })
   }
 
 }

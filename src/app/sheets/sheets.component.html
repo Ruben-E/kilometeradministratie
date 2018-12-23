@@ -1,14 +1,25 @@
 <section class="section">
   <div class="container">
-    <h1>Spreadsheets</h1>
-    <mat-card>
-      <mat-card-content>
+    <div *ngIf='!signedIn'>
+      <h1 class="mat-display-1">Kilometeradministratie</h1>
 
-        <div *ngIf='isLoggedIn()'>
+      <mat-card>
+        <mat-card-content>
+          <p>Please log in to continue.</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div *ngIf='signedIn'>
+
+      <h1 class="mat-display-1">Spreadsheets</h1>
+
+      <mat-card>
+        <mat-card-content>
+
 
           <div *ngIf="sheets">
             <mat-nav-list>
-                <a *ngFor="let sheet of sheets" mat-list-item routerLink="/rides/{{sheet.id}}">{{sheet.name}}</a>
+              <a *ngFor="let sheet of sheets" mat-list-item routerLink="/rides/{{sheet.id}}">{{sheet.name}}</a>
             </mat-nav-list>
           </div>
 
@@ -21,9 +32,10 @@
             </div>
           </div>
 
-        </div>
-      </mat-card-content>
-    </mat-card>
+
+        </mat-card-content>
+      </mat-card>
+    </div>
   </div>
 </section>
 

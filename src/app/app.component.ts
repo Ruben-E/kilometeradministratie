@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {UserService} from "./user.service";
 import {GoogleApiService, GoogleAuthService} from "ng-gapi";
+import {Observable} from "rxjs";
+import {Route} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -9,6 +11,9 @@ import {GoogleApiService, GoogleAuthService} from "ng-gapi";
 })
 export class AppComponent {
   title = 'Kilometeradministratie';
+  signedIn = false;
+  userName = '';
+  userImage = '';
 
   constructor(private userService: UserService,
               private authService: GoogleAuthService,
@@ -19,18 +24,30 @@ export class AppComponent {
   }
 
   ngOnInit() {
-      this.signIn();
+    this.isSignedIn();
+
+    this.userService.listenForSigninStatus().subscribe(signedIn => {
+      window.location.reload();
+    })
   }
 
-  public isLoggedIn(): boolean {
-    return this.userService.isUserSignedIn();
+  isSignedIn() {
+    this.userService.isUserSignedIn().subscribe(signedIn => {
+      this.signedIn = signedIn;
+      if (signedIn) {
+        this.userService.getCurrentUser().subscribe(user => {
+          this.userName = user.getBasicProfile().getName();
+          this.userImage = user.getBasicProfile().getImageUrl();
+        });
+      }
+    })
   }
 
-  public signIn() {
-      this.authService.getAuth().subscribe((auth) => {
-        if (!this.isLoggedIn() || !auth.isSignedIn.get()) {
-          this.userService.signIn()
-        }
-     })
+  signIn() {
+    this.userService.signIn();
+  }
+
+  signOut() {
+    this.userService.signOut();
   }
 }

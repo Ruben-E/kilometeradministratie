@@ -41,6 +41,18 @@
         <button class="home" mat-button routerLink="/">
           <span>{{title}}</span>
         </button>
+
+        <button class="home" *ngIf="signedIn" mat-button [matMenuTriggerFor]="profileMenu">
+          <span>{{userName}}</span>
+        </button>
+
+        <button class="home" *ngIf="!signedIn" mat-button (click)="signIn()">
+          <span>Sign in</span>
+        </button>
+
+        <mat-menu #profileMenu="matMenu">
+          <button mat-menu-item (click)="signOut()">Sign out</button>
+        </mat-menu>
       </mat-toolbar-row>
     </mat-toolbar>
 

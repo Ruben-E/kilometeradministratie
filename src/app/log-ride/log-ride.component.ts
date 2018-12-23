@@ -19,7 +19,8 @@ export class LogRideComponent implements OnChanges, OnInit {
   differentRoute: boolean = false;
 
   constructor(private rideService: RideService,
-              private userService: UserService) { }
+              private userService: UserService) {
+  }
 
   ngOnInit() {
   }
@@ -42,17 +43,17 @@ export class LogRideComponent implements OnChanges, OnInit {
   }
 
   onSubmit() {
-    this.newRide.number = this.rides.filter(ride => dayjs(ride.date).isSame(dayjs(this.newRide.date))).length + 1;
-    this.newRide.kilometers = this.newRide.endOdoMeter - this.newRide.startOdoMeter;
-    this.rideService.saveRide(this.userService.getToken(), this.sheetId, this.newRide).subscribe(_ => {
-      this.logged.emit(this.newRide);
-      this.newRide = this.defaultRide();
-    })
+      this.newRide.number = this.rides.filter(ride => dayjs(ride.date).isSame(dayjs(this.newRide.date))).length + 1;
+      this.newRide.kilometers = this.newRide.endOdoMeter - this.newRide.startOdoMeter;
+      this.rideService.saveRide(this.sheetId, this.newRide).subscribe(_ => {
+        this.logged.emit(this.newRide);
+        this.newRide = this.defaultRide();
+      })
   }
 
   ngOnChanges(changes: SimpleChanges) {
     const ridesChange: SimpleChange = changes.rides;
-    const newRides = <Ride[]> ridesChange.currentValue;
+    const newRides = <Ride[]>ridesChange.currentValue;
     if (newRides && newRides.length > 0 && newRides[0].endOdoMeter) {
       this.newRide.startOdoMeter = newRides[0].endOdoMeter;
     }

@@ -11,8 +11,10 @@
         </div>
         <div class="column">
           <mat-form-field class="full-width">
-            <input matInput placeholder="Type" type="text" class="form-control" id="type" name="type" required
-                   [(ngModel)]="newRide.type">
+            <mat-select placeholder="Karakter" name="type" id="type" required [(ngModel)]="newRide.type">
+              <mat-option value="Zakelijk">Zakelijk</mat-option>
+              <mat-option value="Privé">Privé</mat-option>
+            </mat-select>
           </mat-form-field>
         </div>
       </div>
@@ -85,7 +87,7 @@
         </div>
       </div>
 
-      <button type="submit" class="btn btn-success">Submit</button>
+      <button mat-raised-button type="submit" class="btn btn-success" [disabled]="!rideForm.form.valid">Submit</button>
 
     </form>
   </mat-card-content>

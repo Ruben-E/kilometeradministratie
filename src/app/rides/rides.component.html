@@ -1,33 +1,30 @@
 <section class="section">
   <div class="container">
-    <div *ngIf='isLoggedIn()'>
-      <div *ngIf="sheetLoading">
-        Loading...
+    <div *ngIf="sheetLoading">
+      Loading...
+    </div>
+
+    <div *ngIf="!sheetLoading">
+
+      <div *ngIf="sheet">
+        <h1 class="mat-display-1">{{sheet.name}}</h1>
+
+        <app-log-ride [rides]="rides" [sheetId]="getSheetId()" (logged)="rideLogged($event)"></app-log-ride>
+
+
+        <div *ngIf="ridesLoading">
+          Loading...
+        </div>
+
+
+        <div *ngIf="!ridesLoading">
+          <app-rides-overview [rides]="rides"></app-rides-overview>
+        </div>
+
       </div>
 
-      <div *ngIf="!sheetLoading">
-
-        <div *ngIf="sheet">
-          <h1 class="mat-display-1">{{sheet.name}}</h1>
-
-          <app-log-ride [rides]="rides" [sheetId]="getSheetId()" (logged)="rideLogged($event)"></app-log-ride>
-
-
-          <div *ngIf="ridesLoading">
-            Loading...
-          </div>
-
-
-
-          <div *ngIf="!ridesLoading">
-            <app-rides-overview [rides]="rides"></app-rides-overview>
-          </div>
-
-        </div>
-
-        <div *ngIf="!sheet">
-          Error...
-        </div>
+      <div *ngIf="!sheet">
+        Error...
       </div>
     </div>
   </div>
