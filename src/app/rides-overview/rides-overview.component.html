@@ -1,0 +1,10 @@
+<div *ngIf="rides">
+  <ul class="rides">
+    <li *ngFor="let ride of rides">
+      {{ride.date}} - {{ride.number }} - {{ride.fromAddress}} -> {{ride.toAddress}}
+    </li>
+  </ul>
+</div>
+<div *ngIf="!rides">
+  Error...
+</div>

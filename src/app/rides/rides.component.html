@@ -10,81 +10,17 @@
         <div *ngIf="sheet">
           <h1>{{sheet.name}}</h1>
 
-          <mat-card>
-            <mat-card-content>
+          <app-log-ride [rides]="rides" [sheetId]="getSheetId()" (logged)="rideLogged($event)"></app-log-ride>
 
-          <form (ngSubmit)="onSubmit()" #rideForm="ngForm">
-            <div class="form-group">
-              <mat-form-field>
-                <input matInput type="date" class="form-control" id="date" name="date" required
-                       [(ngModel)]="newRide.date">
-              </mat-form-field>
-            </div>
-
-            <mat-form-field>
-              <input matInput placeholder="Beginstand" type="number" class="form-control" id="startOdoMeter"
-                     name="startOdoMeter" required [(ngModel)]="newRide.startOdoMeter">
-            </mat-form-field>
-
-            <mat-form-field>
-              <input matInput type="number" placeholder="Eindstand" class="form-control" id="endOdoMeter"
-                     name="endOdoMeter" required [(ngModel)]="newRide.endOdoMeter">
-            </mat-form-field>
-
-            <mat-form-field>
-              <input matInput placeholder="Van" type="text" class="form-control" id="fromAddress" name="fromAddress"
-                     required
-                     [(ngModel)]="newRide.fromAddress">
-            </mat-form-field>
-
-            <mat-form-field>
-              <input matInput placeholder="Naar" type="text" class="form-control" id="toAddress" name="toAddress"
-                     required
-                     [(ngModel)]="newRide.toAddress">
-            </mat-form-field>
-
-            <mat-form-field>
-              <input matInput placeholder="Afwijkende route" type="text" class="form-control" id="route" name="route"
-                     [(ngModel)]="newRide.route">
-            </mat-form-field>
-
-            <mat-form-field>
-              <input matInput placeholder="Bezoekadres" type="text" class="form-control" id="visitedAddress"
-                     name="visitedAddress"
-                     [(ngModel)]="newRide.visitedAddress">
-            </mat-form-field>
-
-            <mat-form-field>
-              <input matInput placeholder="Type" type="text" class="form-control" id="type" name="type" required
-                     [(ngModel)]="newRide.type">
-            </mat-form-field>
-
-            <mat-form-field>
-              <input matInput placeholder="Bijzonderheden" type="text" class="form-control" id="remarks" name="remarks"
-                     [(ngModel)]="newRide.remarks">
-            </mat-form-field>
-
-            <button type="submit" class="btn btn-success">Submit</button>
-
-          </form>
-            </mat-card-content>
-          </mat-card>
 
           <div *ngIf="ridesLoading">
             Loading...
           </div>
 
+
+
           <div *ngIf="!ridesLoading">
-            <div *ngIf="rides">
-              <ul class="rides">
-                <li *ngFor="let ride of rides">
-                  {{ride.date}} - {{ride.number }} - {{ride.fromAddress}} -> {{ride.toAddress}}
-                </li>
-              </ul>
-            </div>
-            <div *ngIf="!rides">
-              Error...
-            </div>
+            <app-rides-overview [rides]="rides"></app-rides-overview>
           </div>
 
         </div>

@@ -11,8 +11,10 @@ import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from "./material.module";
 import {FlexLayoutModule} from "@angular/flex-layout";
+import { LogRideComponent } from './log-ride/log-ride.component';
+import { RidesOverviewComponent } from './rides-overview/rides-overview.component';
 
-let clientId = "";
+let clientId = "912411441317-nj1lc9j2ev1sk9asmp1fihi302r3mn75.apps.googleusercontent.com";
 let gapiClientConfig: NgGapiClientConfig = {
   client_id: clientId,
   discoveryDocs: ["https://analyticsreporting.googleapis.com/$discovery/rest?version=v4"],
@@ -27,7 +29,9 @@ let gapiClientConfig: NgGapiClientConfig = {
   declarations: [
     AppComponent,
     RidesComponent,
-    SheetsComponent
+    SheetsComponent,
+    LogRideComponent,
+    RidesOverviewComponent
   ],
   imports: [
     BrowserModule,
