@@ -18,7 +18,6 @@ before_script:
   - npm install -g angular-cli-ghpages@0.5.3
 
 script:
-  - npm install --no-optional;
   - ng build --prod --base-href https://ruben-e.github.io/kilometeradministratie/;
   - ngh --repo="$GITHUB_REPO" --name="$GITHUB_NAME" --email="$GITHUB_EMAIL" --dir=dist/kilometeradministratie;
 
