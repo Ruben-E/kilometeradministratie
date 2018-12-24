@@ -1,0 +1,27 @@
+language: node_js
+
+node_js:
+  - 9
+
+cache:
+  directories:
+    - node_modules
+
+env:
+  global:
+    - GITHUB_REPO="https://GH_TOKEN@github.com/Ruben-E/kilometeradministratie.git"
+    - GITHUB_NAME="Travis"
+    - GITHUB_EMAIL="travis@github.com"
+
+before_script:
+  - npm install -g @angular/cli@7.1.4
+  - npm install -g angular-cli-ghpages@0.5.3
+
+script:
+  - npm install --no-optional;
+  - ng build --prod --base-href https://ruben-e.github.io/kilometeradministratie/;
+  - ngh --repo="$GITHUB_REPO" --name="$GITHUB_NAME" --email="$GITHUB_EMAIL" --dir=dist/kilometeradministratie;
+
+branches:
+  only:
+    - master
