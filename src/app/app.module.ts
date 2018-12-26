@@ -18,7 +18,7 @@ let clientId = "912411441317-nj1lc9j2ev1sk9asmp1fihi302r3mn75.apps.googleusercon
 let gapiClientConfig: NgGapiClientConfig = {
   client_id: clientId,
   discoveryDocs: ["https://analyticsreporting.googleapis.com/$discovery/rest?version=v4"],
-  // ux_mode: "redirect",
+  ux_mode: "redirect",
 
   scope: [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -36,7 +36,6 @@ let gapiClientConfig: NgGapiClientConfig = {
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -46,6 +45,7 @@ let gapiClientConfig: NgGapiClientConfig = {
       provide: NG_GAPI_CONFIG,
       useValue: gapiClientConfig
     }),
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

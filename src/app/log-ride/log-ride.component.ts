@@ -37,7 +37,7 @@ export class LogRideComponent implements OnChanges, OnInit {
       toAddress: '',
       visitedAddress: '',
       route: '',
-      type: '',
+      type: 'Zakelijk',
       remarks: ''
     }
   }
