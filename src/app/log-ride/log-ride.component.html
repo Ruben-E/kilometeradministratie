@@ -1,19 +1,51 @@
 <mat-card>
   <mat-card-content>
 
-    <app-preset-picker [sheetId]="sheetId" (selected)="presetSelected($event)"></app-preset-picker>
-
     <form (ngSubmit)="onSubmit()" #rideForm="ngForm">
-      <div class="columns is-desktop is-multiline">
+
+      <div class="columns is-desktop">
         <div class="column">
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Datum" type="date" class="form-control" id="date" name="date" required
-                   [(ngModel)]="newRide.date">
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Datum</mat-label>
+            <input matInput type="date" id="date" name="date" required [(ngModel)]="newRide.date">
+          </mat-form-field>
+        </div>
+
+        <div class="column">
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Beginstand</mat-label>
+            <input matInput type="number" id="startOdoMeter" name="startOdoMeter" required
+                   [(ngModel)]="newRide.startOdoMeter">
           </mat-form-field>
         </div>
         <div class="column">
-          <mat-form-field class="full-width">
-            <mat-select placeholder="Karakter" name="type" id="type" required [(ngModel)]="newRide.type">
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Eindstand</mat-label>
+            <input matInput type="number" id="endOdoMeter" name="endOdoMeter" required
+                   [(ngModel)]="newRide.endOdoMeter">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <app-preset-picker [sheetId]="sheetId" (selected)="presetSelected($event)"></app-preset-picker>
+
+      <div class="columns is-desktop">
+        <div class="column">
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Van</mat-label>
+            <input matInput type="text" id="fromAddress" name="fromAddress" required [(ngModel)]="newRide.fromAddress">
+          </mat-form-field>
+        </div>
+        <div class="column">
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Naar</mat-label>
+            <input matInput type="text" id="toAddress" name="toAddress" required [(ngModel)]="newRide.toAddress">
+          </mat-form-field>
+        </div>
+        <div class="column">
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Karakter</mat-label>
+            <mat-select name="type" id="type" required [(ngModel)]="newRide.type">
               <mat-option value="Zakelijk">Zakelijk</mat-option>
               <mat-option value="Privé">Privé</mat-option>
             </mat-select>
@@ -23,73 +55,28 @@
 
       <div class="columns is-desktop">
         <div class="column">
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Beginstand" type="number" class="form-control" id="startOdoMeter"
-                   name="startOdoMeter" required [(ngModel)]="newRide.startOdoMeter">
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Afwijkende route</mat-label>
+            <input matInput type="text" id="route" name="route" [(ngModel)]="newRide.route">
           </mat-form-field>
         </div>
+
         <div class="column">
-          <mat-form-field class="full-width">
-            <input matInput type="number" placeholder="Eindstand" class="form-control" id="endOdoMeter"
-                   name="endOdoMeter" required [(ngModel)]="newRide.endOdoMeter">
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Bezoekadres</mat-label>
+            <input matInput type="text" id="visitedAddress" name="visitedAddress" [(ngModel)]="newRide.visitedAddress">
           </mat-form-field>
         </div>
-      </div>
 
-      <div class="columns is-desktop">
         <div class="column">
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Van" type="text" class="form-control" id="fromAddress" name="fromAddress"
-                   required
-                   [(ngModel)]="newRide.fromAddress">
-          </mat-form-field>
-        </div>
-        <div class="column">
-          <div class="columns">
-            <div class="column is-three-fifths">
-              <mat-form-field class="full-width">
-                <input matInput placeholder="Naar" type="text" class="form-control" id="toAddress" name="toAddress"
-                       required
-                       [(ngModel)]="newRide.toAddress">
-              </mat-form-field>
-            </div>
-            <div class="column">
-              <mat-checkbox [(ngModel)]="differentRoute" name="differentRoute">Afwijkende route</mat-checkbox>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="columns is-desktop" *ngIf="differentRoute">
-        <div class="column">
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Afwijkende route" type="text" class="form-control" id="route" name="route"
-                   [(ngModel)]="newRide.route">
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Opmerkingen</mat-label>
+            <input matInput type="text" id="remarks" name="remarks" [(ngModel)]="newRide.remarks">
           </mat-form-field>
         </div>
       </div>
 
-      <div class="columns is-desktop">
-        <div class="column">
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Bezoekadres" type="text" class="form-control" id="visitedAddress"
-                   name="visitedAddress"
-                   [(ngModel)]="newRide.visitedAddress">
-          </mat-form-field>
-        </div>
-      </div>
-
-      <div class="columns is-desktop">
-        <div class="column">
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Bijzonderheden" type="text" class="form-control" id="remarks" name="remarks"
-                   [(ngModel)]="newRide.remarks">
-          </mat-form-field>
-        </div>
-      </div>
-
-      <button mat-raised-button type="submit" class="btn btn-success" [disabled]="!rideForm.form.valid">Submit</button>
+      <button mat-raised-button type="submit" color="primary" [disabled]="!rideForm.form.valid">Submit</button>
 
     </form>
   </mat-card-content>

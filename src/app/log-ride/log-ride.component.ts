@@ -1,9 +1,19 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange, SimpleChanges} from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChange,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import {Ride} from "../ride";
 import * as dayjs from 'dayjs';
 import {RideService} from "../ride.service";
-import {PresetService} from "../preset.service";
 import {Preset} from "../preset";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-log-ride',
@@ -15,14 +25,16 @@ export class LogRideComponent implements OnChanges, OnInit {
   @Input() rides: Ride[];
   @Input() sheetId: string;
   @Output() logged = new EventEmitter<Ride>();
+  @ViewChild('rideForm') public rideForm: NgForm;
 
-  newRide: Ride = this.defaultRide();
+  newRide: Ride;
   differentRoute: boolean = false;
 
   constructor(private rideService: RideService) {
   }
 
   ngOnInit() {
+    this.newRide = this.defaultRide();
   }
 
   defaultRide() {
@@ -46,8 +58,9 @@ export class LogRideComponent implements OnChanges, OnInit {
       this.newRide.number = this.rides.filter(ride => dayjs(ride.date).isSame(dayjs(this.newRide.date))).length + 1;
       this.newRide.kilometers = this.newRide.endOdoMeter - this.newRide.startOdoMeter;
       this.rideService.saveRide(this.sheetId, this.newRide).subscribe(_ => {
-        this.logged.emit(this.newRide);
+        this.rideForm.resetForm();
         this.newRide = this.defaultRide();
+        this.logged.emit(this.newRide);
       })
   }
 
