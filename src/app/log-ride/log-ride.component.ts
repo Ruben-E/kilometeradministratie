@@ -3,6 +3,7 @@ import {Ride} from "../ride";
 import * as dayjs from 'dayjs';
 import {RideService} from "../ride.service";
 import {PresetService} from "../preset.service";
+import {Preset} from "../preset";
 
 @Component({
   selector: 'app-log-ride',
@@ -18,14 +19,10 @@ export class LogRideComponent implements OnChanges, OnInit {
   newRide: Ride = this.defaultRide();
   differentRoute: boolean = false;
 
-  constructor(private rideService: RideService,
-              private presetService: PresetService) {
+  constructor(private rideService: RideService) {
   }
 
   ngOnInit() {
-    this.presetService.getPresets(this.sheetId).subscribe(presets => {
-      console.log(presets);
-    })
   }
 
   defaultRide() {
@@ -60,5 +57,15 @@ export class LogRideComponent implements OnChanges, OnInit {
     if (newRides && newRides.length > 0 && newRides[0].endOdoMeter) {
       this.newRide.startOdoMeter = newRides[0].endOdoMeter;
     }
+  }
+
+  presetSelected(preset: Preset) {
+    this.newRide.fromAddress = preset.fromAddress;
+    this.newRide.toAddress = preset.toAddress;
+    this.newRide.visitedAddress = preset.visitedAddress;
+    this.newRide.type = preset.type;
+    this.newRide.remarks = preset.remarks;
+    this.newRide.route = preset.route;
+    this.differentRoute = !!preset.route;
   }
 }

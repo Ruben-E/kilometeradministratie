@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Ride} from "../ride";
+import {Preset} from "../preset";
+import {PresetService} from "../preset.service";
 
 @Component({
   selector: 'app-preset-picker',
@@ -7,9 +10,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PresetPickerComponent implements OnInit {
 
-  constructor() { }
+  @Input() sheetId: string;
+  @Output() selected = new EventEmitter<Preset>();
 
-  ngOnInit() {
+  presets: Preset[];
+  loading: boolean = true;
+
+  constructor(private presetService: PresetService) {
   }
 
+  ngOnInit() {
+    this.getPresets();
+  }
+
+  getPresets() {
+    this.loading = true;
+    this.presetService.getPresets(this.sheetId).subscribe(presets => {
+      this.presets = presets;
+      this.loading = false;
+    })
+  }
+
+  presetSelected(preset: Preset) {
+    this.selected.emit(preset);
+  }
 }

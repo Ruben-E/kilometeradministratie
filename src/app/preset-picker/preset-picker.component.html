@@ -1,3 +1,7 @@
-<p>
-  preset-picker works!
-</p>
+<mat-menu #appMenu="matMenu">
+  <button *ngFor="let preset of presets" (click)="presetSelected(preset)" mat-menu-item>{{preset.fromAlias}} <mat-icon>arrow_right</mat-icon>{{preset.toAlias}}</button>
+</mat-menu>
+
+<button mat-icon-button [matMenuTriggerFor]="appMenu">
+  Presets
+</button>

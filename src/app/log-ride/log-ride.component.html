@@ -1,6 +1,8 @@
 <mat-card>
   <mat-card-content>
 
+    <app-preset-picker [sheetId]="sheetId" (selected)="presetSelected($event)"></app-preset-picker>
+
     <form (ngSubmit)="onSubmit()" #rideForm="ngForm">
       <div class="columns is-desktop is-multiline">
         <div class="column">
