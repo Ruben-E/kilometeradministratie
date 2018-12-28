@@ -581,8 +581,6 @@ MIT
 
 @angular/material/select
 
-@angular/material/checkbox
-
 @angular/material/sidenav
 
 @angular/material/toolbar
