@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange,
 import {Ride} from "../ride";
 import * as dayjs from 'dayjs';
 import {RideService} from "../ride.service";
-import {UserService} from "../user.service";
+import {PresetService} from "../preset.service";
 
 @Component({
   selector: 'app-log-ride',
@@ -19,10 +19,13 @@ export class LogRideComponent implements OnChanges, OnInit {
   differentRoute: boolean = false;
 
   constructor(private rideService: RideService,
-              private userService: UserService) {
+              private presetService: PresetService) {
   }
 
   ngOnInit() {
+    this.presetService.getPresets(this.sheetId).subscribe(presets => {
+      console.log(presets);
+    })
   }
 
   defaultRide() {

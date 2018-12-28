@@ -13,6 +13,7 @@ import {MaterialModule} from "./material.module";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import { LogRideComponent } from './log-ride/log-ride.component';
 import { RidesOverviewComponent } from './rides-overview/rides-overview.component';
+import { PresetPickerComponent } from './preset-picker/preset-picker.component';
 
 let clientId = "912411441317-nj1lc9j2ev1sk9asmp1fihi302r3mn75.apps.googleusercontent.com";
 let gapiClientConfig: NgGapiClientConfig = {
@@ -32,7 +33,8 @@ let gapiClientConfig: NgGapiClientConfig = {
     RidesComponent,
     SheetsComponent,
     LogRideComponent,
-    RidesOverviewComponent
+    RidesOverviewComponent,
+    PresetPickerComponent
   ],
   imports: [
     BrowserModule,

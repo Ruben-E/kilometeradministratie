@@ -11,7 +11,7 @@ import {Observable} from "rxjs";
 export class RideService {
   private readonly SHEETS_API_URL: string = 'https://sheets.googleapis.com/v4/spreadsheets';
   private readonly DRIVE_API_URL: string = 'https://www.googleapis.com/drive/v3';
-  private readonly RIDES_RANGE = 'A10:K';
+  private readonly RIDES_RANGE = 'rittenregistratie!A10:K';
 
   constructor(private userService: UserService,
               private httpClient: HttpClient,
@@ -27,6 +27,7 @@ export class RideService {
           })
         }).pipe(
           map(res => {
+            console.log(res);
             let values = <any[]>res["values"];
             return values.map(value => {
               return {

@@ -46,6 +46,7 @@ export class SheetService {
         })
       }).pipe(
         map(res => {
+          console.log(res);
           return {
             id: res['spreadsheetId'],
             name: res['properties']['title']

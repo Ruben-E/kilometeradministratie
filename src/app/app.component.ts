@@ -27,6 +27,7 @@ export class AppComponent {
     this.isSignedIn();
 
     this.userService.listenForSigninStatus().subscribe(signedIn => {
+      console.log(signedIn);
       window.location.reload();
     })
   }
