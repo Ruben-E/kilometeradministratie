@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
@@ -25,12 +26,12 @@ export class LogRideComponent implements OnChanges, OnInit {
   @Input() rides: Ride[];
   @Input() sheetId: string;
   @Output() logged = new EventEmitter<Ride>();
-  @ViewChild('rideForm') public rideForm: NgForm;
 
   newRide: Ride;
   differentRoute: boolean = false;
 
-  constructor(private rideService: RideService) {
+  constructor(private rideService: RideService,
+              private changeDetector: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -54,20 +55,23 @@ export class LogRideComponent implements OnChanges, OnInit {
     }
   }
 
-  onSubmit() {
+  onSubmit(form: NgForm) {
+    if (form.valid) {
       this.newRide.number = this.rides.filter(ride => dayjs(ride.date).isSame(dayjs(this.newRide.date))).length + 1;
       this.newRide.kilometers = this.newRide.endOdoMeter - this.newRide.startOdoMeter;
       this.rideService.saveRide(this.sheetId, this.newRide).subscribe(_ => {
-        this.rideForm.resetForm();
-        this.newRide = this.defaultRide();
+        form.resetForm();
+        this.changeDetector.detectChanges();
+        this.newRide = {...this.newRide, ...this.defaultRide()};
         this.logged.emit(this.newRide);
       })
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {
     const ridesChange: SimpleChange = changes.rides;
     const newRides = <Ride[]>ridesChange.currentValue;
-    if (newRides && newRides.length > 0 && newRides[0].endOdoMeter) {
+    if (this.newRide && newRides && newRides.length > 0 && newRides[0].endOdoMeter) {
       this.newRide.startOdoMeter = newRides[0].endOdoMeter;
     }
   }
