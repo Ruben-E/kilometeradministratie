@@ -1,31 +1,12 @@
-<!--<mat-toolbar>-->
-<!--<span>{{ title }}</span>-->
-<!--</mat-toolbar>-->
-
-<!--<mat-sidenav-container class="example-container">-->
-<!--<mat-sidenav mode="side" opened>Sidenav content</mat-sidenav>-->
-<!--<mat-sidenav-content>Main content</mat-sidenav-content>-->
-<!--</mat-sidenav-container>-->
-
-<!--<button *ngIf='!isLoggedIn()' (click)="signIn()">sign in</button>-->
-
-<!--<nav>-->
-<!--<a routerLink="/sheets">Sheets</a>-->
-<!--</nav>-->
-<!--<router-outlet></router-outlet>-->
-
-
 <mat-sidenav-container style="height: 100%">
   <mat-sidenav #sidenav>
     <mat-nav-list>
-      <a mat-list-item>
-        <mat-icon mat-list-icon>home</mat-icon>
-        <span mat-line>home</span>
+      <a mat-list-item *ngIf="signedIn">
+        <span mat-line (click)="signOut()">Sign out</span>
       </a>
 
       <a mat-list-item>
-        <mat-icon mat-list-icon>backup</mat-icon>
-        <span mat-line>Backup</span>
+        <span mat-line (click)="signIn()" *ngIf="!signedIn">Sign in</span>
       </a>
     </mat-nav-list>
   </mat-sidenav>
@@ -33,20 +14,19 @@
     <mat-toolbar color="primary">
 
       <mat-toolbar-row>
-
-        <button mat-icon-button (click)="sidenav.open()" fxHide="false" fxHide.gt-sm>
+        <button mat-icon-button (click)="sidenav.open()" class="d-sm-none">
           <mat-icon>menu</mat-icon>
         </button>
 
-        <button class="home" mat-button routerLink="/">
-          <span>{{title}}</span>
-        </button>
+        <span class="app-title"><a routerLink="/">{{title}}</a></span>
 
-        <button class="home" *ngIf="signedIn" mat-button [matMenuTriggerFor]="profileMenu">
+        <span class="fill-remaining-space"></span>
+
+        <button class="d-none d-sm-block" *ngIf="signedIn" mat-button [matMenuTriggerFor]="profileMenu">
           <span>{{userName}}</span>
         </button>
 
-        <button class="home" *ngIf="!signedIn" mat-button (click)="signIn()">
+        <button class="d-none d-sm-block" *ngIf="!signedIn" mat-button (click)="signIn()">
           <span>Sign in</span>
         </button>
 
