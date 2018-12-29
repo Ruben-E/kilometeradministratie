@@ -1,3 +1,13 @@
-.full-width {
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+mat-form-field.full-width {
   width: 100%;
+}
+mat-form-field.no-hint-spacing {
+  margin-bottom: -1.25em;
+}
+
+.log-ride-form .col {
+  margin-bottom: $spacer;
 }

@@ -1,25 +1,26 @@
 <mat-card>
   <mat-card-content>
 
-    <form (ngSubmit)="onSubmit(rideForm);" #rideForm="ngForm">
+    <form (ngSubmit)="onSubmit(rideForm);" #rideForm="ngForm" class="log-ride-form">
+      <h4>Algemeen</h4>
 
-      <div class="columns is-desktop">
-        <div class="column">
-          <mat-form-field class="full-width" appearance="outline">
+      <div class="row">
+        <div class="col col-12 col-md-4">
+          <mat-form-field class="full-width no-hint-spacing" appearance="outline">
             <mat-label>Datum</mat-label>
             <input matInput type="date" id="date" name="date" required [(ngModel)]="newRide.date">
           </mat-form-field>
         </div>
 
-        <div class="column">
-          <mat-form-field class="full-width" appearance="outline">
+        <div class="col col-6 col-md-4">
+          <mat-form-field class="full-width no-hint-spacing" appearance="outline">
             <mat-label>Beginstand</mat-label>
             <input matInput type="number" id="startOdoMeter" name="startOdoMeter" required
                    [(ngModel)]="newRide.startOdoMeter">
           </mat-form-field>
         </div>
-        <div class="column">
-          <mat-form-field class="full-width" appearance="outline">
+        <div class="col col-6 col-md-4">
+          <mat-form-field class="full-width no-hint-spacing" appearance="outline">
             <mat-label>Eindstand</mat-label>
             <input matInput type="number" id="endOdoMeter" name="endOdoMeter" required
                    [(ngModel)]="newRide.endOdoMeter">
@@ -27,23 +28,29 @@
         </div>
       </div>
 
-      <app-preset-picker [sheetId]="sheetId" (selected)="presetSelected($event)"></app-preset-picker>
+      <h4>Bestemming</h4>
 
-      <div class="columns is-desktop">
-        <div class="column">
-          <mat-form-field class="full-width" appearance="outline">
+      <div class="row">
+        <div class="col">
+          <app-preset-picker [sheetId]="sheetId" (selected)="presetSelected($event)"></app-preset-picker>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col col-md">
+          <mat-form-field class="full-width no-hint-spacing" appearance="outline">
             <mat-label>Van</mat-label>
             <input matInput type="text" id="fromAddress" name="fromAddress" required [(ngModel)]="newRide.fromAddress">
           </mat-form-field>
         </div>
-        <div class="column">
-          <mat-form-field class="full-width" appearance="outline">
+        <div class="col col-md">
+          <mat-form-field class="full-width no-hint-spacing" appearance="outline">
             <mat-label>Naar</mat-label>
             <input matInput type="text" id="toAddress" name="toAddress" required [(ngModel)]="newRide.toAddress">
           </mat-form-field>
         </div>
-        <div class="column">
-          <mat-form-field class="full-width" appearance="outline">
+        <div class="col col-md">
+          <mat-form-field class="full-width no-hint-spacing" appearance="outline">
             <mat-label>Karakter</mat-label>
             <mat-select name="type" id="type" required [(ngModel)]="newRide.type">
               <mat-option value="Zakelijk">Zakelijk</mat-option>
@@ -53,23 +60,23 @@
         </div>
       </div>
 
-      <div class="columns is-desktop">
-        <div class="column">
-          <mat-form-field class="full-width" appearance="outline">
+      <div class="row">
+        <div class="col col-md">
+          <mat-form-field class="full-width no-hint-spacing" appearance="outline">
             <mat-label>Afwijkende route</mat-label>
             <input matInput type="text" id="route" name="route" [(ngModel)]="newRide.route">
           </mat-form-field>
         </div>
 
-        <div class="column">
-          <mat-form-field class="full-width" appearance="outline">
+        <div class="col col-md">
+          <mat-form-field class="full-width no-hint-spacing" appearance="outline">
             <mat-label>Bezoekadres</mat-label>
             <input matInput type="text" id="visitedAddress" name="visitedAddress" [(ngModel)]="newRide.visitedAddress">
           </mat-form-field>
         </div>
 
-        <div class="column">
-          <mat-form-field class="full-width" appearance="outline">
+        <div class="col col-md">
+          <mat-form-field class="full-width no-hint-spacing" appearance="outline">
             <mat-label>Opmerkingen</mat-label>
             <input matInput type="text" id="remarks" name="remarks" [(ngModel)]="newRide.remarks">
           </mat-form-field>
