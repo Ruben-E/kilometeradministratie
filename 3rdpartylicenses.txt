@@ -559,12 +559,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
-@angular/forms
+@angular/animations
 MIT
+
+@angular/material/button
 
 @angular/material/icon
 
-@angular/animations
+@angular/forms
 MIT
 
 @angular/material/core
@@ -576,8 +578,6 @@ MIT
 @angular/material/form-field
 
 @angular/material/menu
-
-@angular/material/button
 
 @angular/material/select
 
