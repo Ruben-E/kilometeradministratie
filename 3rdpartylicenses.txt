@@ -562,6 +562,8 @@ THE SOFTWARE.
 @angular/animations
 MIT
 
+@angular/material/progress-bar
+
 @angular/material/button
 
 @angular/material/icon
@@ -574,6 +576,8 @@ MIT
 @angular/material/list
 
 @angular/material/card
+
+@angular/material/progress-spinner
 
 @angular/material/form-field
 
