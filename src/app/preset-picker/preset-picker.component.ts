@@ -13,8 +13,9 @@ export class PresetPickerComponent implements OnInit {
   @Input() sheetId: string;
   @Output() selected = new EventEmitter<Preset>();
 
-  presets: Preset[];
+  presets: Preset[] = [];
   loading: boolean = true;
+  error: boolean = false;
 
   constructor(private presetService: PresetService) {
   }
@@ -28,6 +29,9 @@ export class PresetPickerComponent implements OnInit {
     this.presetService.getPresets(this.sheetId).subscribe(presets => {
       this.presets = presets;
       this.loading = false;
+    }, error => {
+      this.loading = false;
+      this.error = true;
     })
   }
 

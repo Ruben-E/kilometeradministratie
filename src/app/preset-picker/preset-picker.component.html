@@ -1,5 +1,20 @@
-<mat-menu #presetMenu="matMenu">
-  <button *ngFor="let preset of presets" (click)="presetSelected(preset)" mat-menu-item>{{preset.fromAlias}} <mat-icon>arrow_right</mat-icon>{{preset.toAlias}}</button>
-</mat-menu>
+<div *ngIf="!loading && !error" class="loading">
 
-<button type="button" mat-stroked-button color="primary" [matMenuTriggerFor]="presetMenu">Presets</button>
+  <mat-menu #presetMenu="matMenu">
+    <button *ngIf="!presets" mat-menu-item disabled>No presets</button>
+
+    <button *ngFor="let preset of presets" (click)="presetSelected(preset)" mat-menu-item>{{preset.fromAlias}} <mat-icon>arrow_right</mat-icon>{{preset.toAlias}}</button>
+  </mat-menu>
+
+  <button type="button" mat-stroked-button color="primary" [matMenuTriggerFor]="presetMenu">Presets</button>
+
+</div>
+
+<div *ngIf="loading" class="loading">
+  <button type="button" mat-stroked-button disabled color="primary">Presets loading ...</button>
+</div>
+
+
+<div *ngIf="error" class="loading">
+  <button type="button" mat-stroked-button disabled color="primary">Presets not available</button>
+</div>

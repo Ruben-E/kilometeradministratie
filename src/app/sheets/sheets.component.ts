@@ -11,6 +11,7 @@ import {UserService} from "../user.service";
 })
 export class SheetsComponent implements OnInit {
 
+  signedInLoading: boolean = true;
   signedIn: boolean = false;
   sheets: Sheet[];
   sheetsLoading: boolean = true;
@@ -33,7 +34,9 @@ export class SheetsComponent implements OnInit {
   }
 
   isLoggedIn() {
+    this.signedInLoading = true;
     this.userService.isUserSignedIn().subscribe(signedIn => {
+      this.signedInLoading = false;
       this.signedIn = signedIn;
 
       if (signedIn) {

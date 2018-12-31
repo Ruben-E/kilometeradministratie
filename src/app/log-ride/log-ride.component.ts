@@ -28,7 +28,9 @@ export class LogRideComponent implements OnChanges, OnInit {
   @Output() logged = new EventEmitter<Ride>();
 
   newRide: Ride;
-  differentRoute: boolean = false;
+  loading: boolean = false;
+  error: boolean = false;
+
 
   constructor(private rideService: RideService,
               private changeDetector: ChangeDetectorRef) {
@@ -59,12 +61,21 @@ export class LogRideComponent implements OnChanges, OnInit {
     if (form.valid) {
       this.newRide.number = this.rides.filter(ride => dayjs(ride.date).isSame(dayjs(this.newRide.date))).length + 1;
       this.newRide.kilometers = this.newRide.endOdoMeter - this.newRide.startOdoMeter;
-      this.rideService.saveRide(this.sheetId, this.newRide).subscribe(_ => {
-        form.resetForm();
-        this.changeDetector.detectChanges();
-        this.newRide = {...this.newRide, ...this.defaultRide()};
-        this.logged.emit(this.newRide);
-      })
+      this.loading = true;
+      this.error = false;
+      this.rideService.saveRide(this.sheetId, this.newRide).subscribe(
+        _ => {
+          this.loading = false;
+          form.resetForm();
+          this.changeDetector.detectChanges();
+          this.newRide = {...this.newRide, ...this.defaultRide()};
+          this.logged.emit(this.newRide);
+        },
+        error => {
+          this.loading = false;
+          this.error = true;
+        }
+      )
     }
   }
 
@@ -83,6 +94,5 @@ export class LogRideComponent implements OnChanges, OnInit {
     this.newRide.type = preset.type;
     this.newRide.remarks = preset.remarks;
     this.newRide.route = preset.route;
-    this.differentRoute = !!preset.route;
   }
 }

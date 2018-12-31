@@ -7,7 +7,14 @@ import {
   MatSidenavModule,
   MatListModule,
   MatToolbarModule,
-  MatInputModule, MatTabsModule, MatCardModule, MatCheckboxModule, MatMenuModule, MatSelectModule
+  MatInputModule,
+  MatTabsModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatMenuModule,
+  MatSelectModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 
 @NgModule({
@@ -25,6 +32,8 @@ import {
     MatCheckboxModule,
     MatMenuModule,
     MatSelectModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     CommonModule,
@@ -40,6 +49,8 @@ import {
     MatCheckboxModule,
     MatMenuModule,
     MatSelectModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule
   ],
 })
 export class MaterialModule {
