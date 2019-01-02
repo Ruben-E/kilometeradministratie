@@ -29,22 +29,26 @@ export class RideService {
           map(res => {
             console.log(res);
             let values = <any[]>res["values"];
-            return values.map(value => {
-              return {
-                sheetId: sheetId,
-                date: value[0],
-                number: value[1],
-                startOdoMeter: value[2],
-                endOdoMeter: value[3],
-                kilometers: value[4],
-                fromAddress: value[5],
-                toAddress: value[6],
-                visitedAddress: value[8],
-                route: value[7],
-                type: value[9],
-                remarks: value[10],
-              };
-            });
+            if (values) {
+              return values.map(value => {
+                return {
+                  sheetId: sheetId,
+                  date: value[0],
+                  number: value[1],
+                  startOdoMeter: value[2],
+                  endOdoMeter: value[3],
+                  kilometers: value[4],
+                  fromAddress: value[5],
+                  toAddress: value[6],
+                  visitedAddress: value[8],
+                  route: value[7],
+                  type: value[9],
+                  remarks: value[10],
+                };
+              });
+            } else {
+              return [];
+            }
           })
         );
       });

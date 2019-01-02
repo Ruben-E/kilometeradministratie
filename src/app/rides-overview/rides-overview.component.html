@@ -2,7 +2,7 @@
   <mat-card-content>
 
     <div *ngIf="rides">
-      <mat-list>
+      <mat-list *ngIf="rides.length > 0">
         <ng-container *ngFor="let ride of rides; let i = index;">
           <h3 matSubheader *ngIf="!rides[i-1]">{{ride.date}}</h3>
           <h3 matSubheader *ngIf="ride.date && rides[i-1] && ride.date !== rides[i-1].date">{{ride.date}}</h3>
@@ -16,6 +16,12 @@
             <p matLine *ngIf="ride.kilometers">{{ride.kilometers}} kilometer <i *ngIf="ride.startOdoMeter && ride.endOdoMeter">({{ride.startOdoMeter}} - {{ride.endOdoMeter}})</i></p>
           </mat-list-item>
         </ng-container>
+      </mat-list>
+      <mat-list *ngIf="rides.length == 0">
+
+          <mat-list-item>
+            <h4 matLine>Nog geen ritten</h4>
+          </mat-list-item>
       </mat-list>
     </div>
     <div *ngIf="!rides">
