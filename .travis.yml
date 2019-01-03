@@ -19,7 +19,7 @@ before_script:
 
 script:
   - ng build --prod --base-href https://kilometeradministratie.rubenernst.com/;
-  - ngh --repo="$GITHUB_REPO" --name="$GITHUB_NAME" --email="$GITHUB_EMAIL" --dir=dist/kilometeradministratie;
+  - ngh --repo="$GITHUB_REPO" --name="$GITHUB_NAME" --email="$GITHUB_EMAIL" --dir=dist/kilometeradministratie --cname=kilometeradministratie.rubenernst.com;
 
 branches:
   only:
