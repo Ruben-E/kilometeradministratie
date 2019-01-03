@@ -27,7 +27,7 @@ export class LogRideComponent implements OnChanges, OnInit {
   @Input() sheetId: string;
   @Output() logged = new EventEmitter<Ride>();
 
-  newRide: Ride;
+  newRide: Ride = this.defaultRide();
   loading: boolean = false;
   error: boolean = false;
 
@@ -37,7 +37,6 @@ export class LogRideComponent implements OnChanges, OnInit {
   }
 
   ngOnInit() {
-    this.newRide = this.defaultRide();
   }
 
   defaultRide() {
