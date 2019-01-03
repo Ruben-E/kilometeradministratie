@@ -1,12 +1,10 @@
-import {Component, NgZone, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Sheet} from '../sheet';
 import {ActivatedRoute} from '@angular/router';
-import {Location} from '@angular/common';
 
 import {RideService} from "../ride.service";
 import {SheetService} from "../sheet.service";
 import {Ride} from "../ride";
-import {UserService} from "../user.service";
 
 @Component({
   selector: 'app-rides',
